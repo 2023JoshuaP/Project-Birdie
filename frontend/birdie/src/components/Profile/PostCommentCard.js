@@ -1,6 +1,7 @@
 import { Avatar } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types"; // Import PropTypes
 
 const PostCommentCard = (props) => {
     const {
@@ -12,6 +13,7 @@ const PostCommentCard = (props) => {
         post_creator,
         post_created,
     } = props;
+
     return (
         <div className="w-ful bg-gray-50 mt-4 p-4 grid grid-cols-1 rounded-md m-2 sm:m-0 sm:mt-4 dark:bg-[#030108]">
             <div className="flex gap-4 items-center">
@@ -42,6 +44,17 @@ const PostCommentCard = (props) => {
             </p>
         </div>
     );
+};
+
+// Prop types validation
+PostCommentCard.propTypes = {
+    post_id: PropTypes.string.isRequired,
+    created: PropTypes.string.isRequired,
+    post_content: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    post_creator_profile: PropTypes.string.isRequired,
+    post_creator: PropTypes.string.isRequired,
+    post_created: PropTypes.string.isRequired,
 };
 
 export default PostCommentCard;
