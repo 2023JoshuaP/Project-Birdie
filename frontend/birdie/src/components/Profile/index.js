@@ -19,9 +19,12 @@ const Profile = () => {
   const { profileData } = useUserContext();
   const [queryParams, setQueryParams] = useSearchParams();
   const { darkTheme } = useThemeContext();
+
   const handleChange = (x, value) => {
     setQueryParams({ tab: value });
   };
+
+  // Desestructuración con encadenamiento opcional en caso de que profileData sea undefined o null
   const {
     username,
     profile_pic,
@@ -29,7 +32,8 @@ const Profile = () => {
     following,
     date_joined,
     cover_pic,
-  } = profileData;
+  } = profileData || {}; // Se usa un objeto vacío como valor por defecto
+
   const currentTab = queryParams.get("tab") || "posts";
 
   useEffect(() => {
@@ -37,7 +41,7 @@ const Profile = () => {
     return function () {
       document.title = "Birdie";
     };
-  }, []);
+  }, [username]);
 
   return (
     <div className="w-[599px] max-w-[99%] mt-1 mx-auto">
@@ -48,17 +52,17 @@ const Profile = () => {
               src={cover_pic}
               alt="cover"
               className="w-full h-full object-cover"
-            ></img>
+            />
           </div>
           {profile_pic ? (
             <img
               src={profile_pic}
               alt={username}
               className="rounded-full w-[136px] h-[136px] object-cover absolute top-1/2 left-2 border-4 border-purple-500"
-            ></img>
+            />
           ) : (
             <div className="rounded-full w-[136px] h-[136px] flex items-center justify-center text-white text-5xl absolute top-1/2 left-2 border-4 bg-[#bdbdbd]">
-              {username && username.at(0).toUpperCase()}
+              {username?.at(0).toUpperCase()} {/* Usando encadenamiento opcional */}
             </div>
           )}
         </div>
