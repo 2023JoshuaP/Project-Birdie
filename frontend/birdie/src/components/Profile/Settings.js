@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";  // Combina la importación de React y los hooks
 import useUserContext from "../../contexts/UserContext";
 import usePageContext from "../../contexts/pageContext";
-import { useEffect } from "react";
 import { ChangePasswordModal } from "../global/Modals";
+
 
 const validUsernamePattern = /^[\w.@+-]+$/;
 
@@ -24,7 +24,7 @@ const Settings = () => {
         username: username,
         ...defaultFileValues,
     });
-    const [updatePassword, setupdatePassword] = useState(false);
+    const [isPasswordUpdated, setIsPasswordUpdated] = useState(false);
     const clearField = (field) => {
         const fieldFileIdMapping = {
             profile_pic: "profilePicUpdate",
@@ -154,7 +154,7 @@ const Settings = () => {
                             ></img>
                         ) : (
                             <div className="rounded-full w-[136px] h-[136px] flex items-center justify-center text-white text-5xl border-4 bg-[#bdbdbd]">
-                                {username && username.at(0).toUpperCase()}
+                                {username?.at(0)?.toUpperCase()}
                             </div>
                         )}
                     </div>
@@ -271,7 +271,7 @@ const Settings = () => {
                                     alert("You can't update the password of this account");
                                     return;
                                 }
-                                setupdatePassword(true);
+                                setIsPasswordUpdated(true);
                             }}
                         >
                             Change
@@ -287,8 +287,8 @@ const Settings = () => {
                     </button>
                 </div>
             </form>
-            {updatePassword && (
-                <ChangePasswordModal open={updatePassword} close={() => setupdatePassword(false)} />
+            {isPasswordUpdated && (
+                <ChangePasswordModal open={isPasswordUpdated} close={() => setIsPasswordUpdated(false)} />
             )}
         </div>
     );
