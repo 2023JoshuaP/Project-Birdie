@@ -12,8 +12,11 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
         token['user_name'] = user.username
         try:
-            token["profile_pic"] = user.profile_pic.url
-        except:
+            if user.profile_pic:
+                token["profile_pic"] = user.profile_pic.url
+            else:
+                token["profile_pic"] = ""
+        except ValueError:
             token["profile_pic"] = ""
 
         return token
