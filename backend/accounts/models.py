@@ -11,15 +11,15 @@ def profile_path(user, filename: str) -> str:
     """
     extension = filename.split(".").pop()
     directory_name = f"{user.username}_{user.id}"
-    hash = hashlib.md5(str(time.time()).encode()).hexdigest()
-    return f"images/profile/{directory_name}/{hash}.{extension}"
+    unique_hash = hashlib.md5(str(time.time()).encode()).hexdigest()
+    return f"images/profile/{directory_name}/{unique_hash}.{extension}"
 
 
 def cover_image_path(user, filename: str):
     extension = filename.split(".").pop()
     directory_name = f"{user.username}_{user.id}"
-    hash = hashlib.md5(str(time.time()).encode()).hexdigest()
-    return f"images/profile/cover/{directory_name}/{hash}.{extension}"
+    unique_hash = hashlib.md5(str(time.time()).encode()).hexdigest()
+    return f"images/profile/cover/{directory_name}/{unique_hash}.{extension}"
 
 
 class User(AbstractUser):
