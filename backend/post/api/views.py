@@ -13,38 +13,36 @@ from rest_framework.response import Response
 from accounts.models import User
 from typing import Any
 
-
 class PostListAPIView(ListAPIView):
     serializer_class = PostSerializer
 
     def get_queryset(self):
-        filter = self.request.query_params.get('filter', None)
+        filter_param = self.request.query_params.get('filter', None)
         user = self.request.user
-        if filter == 'saved':
+        if filter_param == 'saved':
             return user.saved_post.all().order_by("-created")
-        elif filter == "liked":
+        elif filter_param == "liked":
             return user.liked_post.all().order_by("-created")
-        elif filter == 'user':
+        elif filter_param == 'user':
             return user.posts.all().order_by("-created")
-        elif filter == 'media':
+        elif filter_param == 'media':
             return user.media_posts().order_by("-created")
-        elif filter == "explore":
+        elif filter_param == "explore":
             def _(post):
                 return post.likes.count() + post.saves.count() + post.comments.count()
             return sorted(Post.objects.all().order_by("-created"), key=_, reverse=True)
         else:
             return Post.objects.user_post(user).order_by("-created")
 
-
 class UserPostListAPIView(ListAPIView):
     serializer_class = PostSerializer
     kwargs: dict[str, Any]
 
     def get_queryset(self):
-        filter = self.request.query_params.get('filter', None)
+        filter_param = self.request.query_params.get('filter', None)
         pk = self.kwargs.get("id")
         user: User = get_object_or_404(User, id=pk)
-        if filter == 'media':
+        if filter_param == 'media':
             return user.media_posts().order_by("-created")
         return user.posts.all().order_by("-created")
 
