@@ -13,8 +13,8 @@ def profile_path(instance, filename: str) -> str:
     """
     extension = filename.split(".").pop()
     directory_name = f"{instance.creator.username}_{instance.creator.id}"
-    hash = hashlib.md5(str(time.time()).encode()).hexdigest()
-    return f"images/posts/images/{directory_name}/{hash}.{extension}"
+    unique_hash = hashlib.md5(str(time.time()).encode()).hexdigest()
+    return f"images/posts/images/{directory_name}/{unique_hash}.{extension}"
 
 
 class Comment(models.Model):
