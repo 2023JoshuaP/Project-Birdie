@@ -1,6 +1,7 @@
 import React from "react";
 import usePageContext from "../../contexts/pageContext";
 import Card from "./Card";
+import PropTypes from "prop-types";
 
 const CardContainer = (props) => {
     const {
@@ -42,6 +43,34 @@ const CardContainer = (props) => {
             })}
         </>
     );
+};
+
+CardContainer.propTypes = {
+    posts: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+            creator: PropTypes.shape({
+                username: PropTypes.string.isRequired,
+                profile_pic: PropTypes.string.isRequired,
+                id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+            }).isRequired,
+            content: PropTypes.string.isRequired,
+            image: PropTypes.string,
+            comments: PropTypes.array,
+            likes: PropTypes.number,
+            saves: PropTypes.number,
+            is_liked: PropTypes.bool,
+            is_saved: PropTypes.bool,
+            is_commented: PropTypes.bool,
+            is_following_user: PropTypes.bool,
+            is_followed_by_user: PropTypes.bool,
+            created: PropTypes.string,
+            isEdited: PropTypes.bool,
+        })
+    ),
+    onLike: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired,
+    onComment: PropTypes.func.isRequired,
 };
 
 export default CardContainer;
