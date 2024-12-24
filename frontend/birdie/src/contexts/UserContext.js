@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 const userContext = createContext();
 
@@ -105,6 +106,10 @@ function UserContextProvider({ children }) {
 
     return <userContext.Provider value={authcontext}>{children}</userContext.Provider>;
 }
+
+UserContextProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+};
 
 const useUserContext = () => {
     return useContext(userContext);
