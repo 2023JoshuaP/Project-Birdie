@@ -34,6 +34,7 @@ const Header = (props) => {
                         className="dark:text-white text-gray-900 text-3xl hover:text-purple-500"
                         href="https://github.com/ogayanfe/birdie"
                         target="_blank"
+                        rel="noopener noreferrer"
                         alt="github"
                         aria-label="view code on github"
                     >
