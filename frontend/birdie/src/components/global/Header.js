@@ -3,6 +3,7 @@ import React from "react";
 import useUserContext from "../../contexts/UserContext";
 import { useLocation } from "react-router-dom";
 import useThemeContext from "../../contexts/themeContext";
+import PropTypes from "prop-types";
 
 const Header = (props) => {
     const {
@@ -61,6 +62,10 @@ const Header = (props) => {
             </div>
         </header>
     );
+};
+
+Header.propTypes = {
+    isError: PropTypes.bool,
 };
 
 export default Header;
