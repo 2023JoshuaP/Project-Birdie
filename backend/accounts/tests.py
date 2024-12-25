@@ -47,3 +47,14 @@ class UserModelTest(TestCase):
         self.assertTrue(user2.followers.filter(id=self.user.id).exists())
 
         self.assertTrue(self.user.following.filter(id=user2.id).exists())
+    
+    def test_profile_pic_path(self):
+        with tempfile.NamedTemporaryFile(suffix='.jpg') as img:
+            img.write(b"dummy content")
+            img.flush()
+            img.seek(0)
+            profile_pic = SimpleUploadedFile(img.name, img.read())
+
+        self.user.profile_pic = profile_pic
+        self.user.save()
+        self.assertIn(f"images/profile/{self.user.username}_{self.user.id}/", self.user.profile_pic.name)
