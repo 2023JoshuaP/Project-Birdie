@@ -68,9 +68,9 @@ CardContainer.propTypes = {
             isEdited: PropTypes.bool,
         })
     ),
-    onLike: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired,
-    onComment: PropTypes.func.isRequired,
+    onLike: PropTypes.func,
+    onSave: PropTypes.func,
+    onComment: PropTypes.func,
 };
 
 export default CardContainer;
