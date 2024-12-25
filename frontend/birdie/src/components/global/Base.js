@@ -25,10 +25,16 @@ const Base = () => {
                 </main>
             </div>
             {showSidebar && (
-                <div
+                <button
                     className="fixed w-screen h-screen lg:hidden bg-black opacity-50 z-40"
+                    aria-label="Close Sidebar"
                     onClick={() => setShowSidebar(false)}
-                ></div>
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            setShowSidebar(false);
+                        }
+                    }}
+                ></button>
             )}
         </div>
     );

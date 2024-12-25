@@ -1,5 +1,6 @@
-import { useContext, createContext } from "react";
+import { useContext, createContext, useMemo } from "react";
 import useUserContext from "./UserContext";
+import PropTypes from "prop-types";
 
 export const postActionContext = createContext();
 
@@ -54,17 +55,21 @@ export const PostActionContextProvider = ({ children }) => {
         } else onFailure(response);
     };
 
-    const contextValue = {
-        createPost: createPost,
-        getComments: getComments,
-        getPosts: getPosts,
+    const contextValue = useMemo(() => ({
+        createPost,
+        getComments,
+        getPosts,
         _likePost: likePost,
         _savePost: savePost,
-        _createComment: createComment,
-    };
+        _createComment: createComment
+    }), [axiosInstance]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return <postActionContext.Provider value={contextValue}>{children}</postActionContext.Provider>;
 };
+
+PostActionContextProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+}
 
 const usePostActionContext = () => {
     return useContext(postActionContext);

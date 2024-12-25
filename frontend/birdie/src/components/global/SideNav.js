@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const navElement = [
     { name: "Home", icon: "ant-design:home-filled", href: "/" },
@@ -41,7 +42,6 @@ const SideNav = (props) => {
                             : "fixed left-4 sm:absolute sm:left-auto sm:right-2"
                     }`}
                     onClick={() => setShowSidebar((p) => !p)}
-                    aria-hidden="true"
                 >
                     <iconify-icon
                         icon="charm:menu-hamburger"
@@ -78,6 +78,11 @@ const SideNav = (props) => {
             </nav>
         </div>
     );
+};
+
+SideNav.propTypes = {
+    setShowSidebar: PropTypes.func.isRequired,
+    open: PropTypes.bool.isRequired,
 };
 
 export default SideNav;

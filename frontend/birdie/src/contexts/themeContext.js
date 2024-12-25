@@ -1,13 +1,15 @@
-import React, { useState, useContext, createContext, useEffect } from "react";
+import React, { useState, useContext, createContext, useEffect, useMemo } from "react";
+import PropTypes from "prop-types";
 
 const themeContext = createContext();
 
 const ThemeContextProvider = ({ children }) => {
     const [darkTheme, setDarkTheme] = useState(JSON.parse(localStorage.getItem("darkTheme")));
-    const context = {
-        darkTheme: darkTheme,
+
+    const context = useMemo(() => ({
+        darkTheme,
         setDarkTheme,
-    };
+    }), [darkTheme, setDarkTheme]);
 
     useEffect(() => {
         if (darkTheme) {
@@ -17,6 +19,10 @@ const ThemeContextProvider = ({ children }) => {
     }, [darkTheme]);
     return <themeContext.Provider value={context}>{children}</themeContext.Provider>;
 };
+
+ThemeContextProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+}
 
 const useThemeContext = () => {
     return useContext(themeContext);

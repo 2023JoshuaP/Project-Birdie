@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar } from "@mui/material";
 import useUserContext from "../../contexts/UserContext";
+import PropTypes from "prop-types";
 
 const CommentCard = (props) => {
     const {
@@ -33,5 +34,13 @@ const CommentCard = (props) => {
         </div>
     );
 };
+
+CommentCard.propTypes = {
+    content: PropTypes.string.isRequired,
+    creator_name: PropTypes.string.isRequired,
+    creator_profile_pic: PropTypes.string,
+    creator_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    created: PropTypes.string.isRequired,
+}
 
 export default CommentCard;

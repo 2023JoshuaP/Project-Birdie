@@ -3,6 +3,7 @@ import React from "react";
 import useUserContext from "../../contexts/UserContext";
 import { useLocation } from "react-router-dom";
 import useThemeContext from "../../contexts/themeContext";
+import PropTypes from "prop-types";
 
 const Header = (props) => {
     const {
@@ -33,6 +34,7 @@ const Header = (props) => {
                         className="dark:text-white text-gray-900 text-3xl hover:text-purple-500"
                         href="https://github.com/ogayanfe/birdie"
                         target="_blank"
+                        rel="noopener noreferrer"
                         alt="github"
                         aria-label="view code on github"
                     >
@@ -61,6 +63,10 @@ const Header = (props) => {
             </div>
         </header>
     );
+};
+
+Header.propTypes = {
+    isError: PropTypes.bool,
 };
 
 export default Header;

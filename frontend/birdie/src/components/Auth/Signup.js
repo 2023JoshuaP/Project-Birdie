@@ -48,7 +48,7 @@ export default function SignUp() {
                     <span className="text-3xl">
                         <iconify-icon icon="game-icons:hummingbird"></iconify-icon>
                     </span>
-                    Create An Account
+                    <span>Create An Account</span>
                 </h1>
                 <form onSubmit={(e) => handleSubmit(e)} className="w-full flex flex-col gap-3">
                     <label htmlFor="signup-username">Username</label>

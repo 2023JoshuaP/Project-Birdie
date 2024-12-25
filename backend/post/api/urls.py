@@ -16,7 +16,6 @@ from .views import (
     CommentsListAPIView,
 )
 
-
 urlpatterns = (
     path("<int:pk>/", PostRetrieveAPIView.as_view()),
     path("all/", PostListAPIView.as_view()),

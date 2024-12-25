@@ -3,6 +3,7 @@ import { Avatar } from "@mui/material";
 import useUserContext from "../../contexts/UserContext";
 import usePostActionContext from "../../contexts/PostActionContext";
 import usePageContext from "../../contexts/pageContext";
+import PropTypes from "prop-types";
 
 const ImagePreview = ({ file, removeImage }) => {
     return (
@@ -22,6 +23,11 @@ const ImagePreview = ({ file, removeImage }) => {
         </div>
     );
 };
+
+ImagePreview.propTypes = {
+    file: PropTypes.string.isRequired,
+    removeImage: PropTypes.func.isRequired,
+}
 
 const TweetForm = () => {
     const { setData, maxFileSizeKb } = usePageContext();
