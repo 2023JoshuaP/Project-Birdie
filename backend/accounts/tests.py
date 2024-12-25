@@ -79,4 +79,17 @@ class UserModelTest(TestCase):
         self.user.save()
         self.user.profile_pic.delete()
         self.assertIsNone(self.user.profile_pic.name)
+    def test_multiple_followers_and_following(self):
+        users = [
+            get_user_model().objects.create_user(username=f'user{i}', password='password')
+            for i in range(5)
+        ]
+        for user in users:
+            self.user.following.add(user)
+            user.followers.add(self.user)
+
+        self.assertEqual(self.user.following.count(), 5)
+        for user in users:
+            self.assertTrue(user.followers.filter(id=self.user.id).exists())
+
     
