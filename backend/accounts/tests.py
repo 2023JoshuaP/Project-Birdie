@@ -58,3 +58,12 @@ class UserModelTest(TestCase):
         self.user.profile_pic = profile_pic
         self.user.save()
         self.assertIn(f"images/profile/{self.user.username}_{self.user.id}/", self.user.profile_pic.name)
+    def test_cover_pic_path(self):
+        with tempfile.NamedTemporaryFile(suffix='.jpg') as img:
+            img.write(b"dummy content")
+            img.flush()
+            img.seek(0)
+            cover_pic = SimpleUploadedFile(img.name, img.read())
+
+        self.user.cover_pic = cover_pic
+        self.user.save()
