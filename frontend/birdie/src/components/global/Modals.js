@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Dialog } from "@mui/material";
+import { Dialog, Avatar } from "@mui/material";
 import usePageContext from "../../contexts/pageContext";
 import useUserContext from "../../contexts/UserContext";
 import usePostActionContext from "../../contexts/PostActionContext";
 import CommentCard from "./CommentCard";
 import CommentForm from "./CommentForm";
-import { Avatar } from "@mui/material";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import useThemeContext from "../../contexts/themeContext";
+import PropTypes from "prop-types";
 
 const ImagePreview = ({ src, removeImage, file }) => {
     if (src || file.file) {
@@ -34,6 +34,14 @@ const ImagePreview = ({ src, removeImage, file }) => {
         </div>
     );
 };
+
+ImagePreview.propTypes = {
+    src: PropTypes.string,
+    removeImage: PropTypes.func.isRequired,
+    file: PropTypes.shape({
+        file: PropTypes.string,
+    }).isRequired,
+}
 
 const CommentsModal = ({ id, open, close, onComment }) => {
     const { getComments } = usePostActionContext();
@@ -105,8 +113,10 @@ const CommentsModal = ({ id, open, close, onComment }) => {
             fullScreen={fullScreen}
         >
             <div
-                className="max-w-md mx-auto w-screen h-screen  dark:bg-black flex flex-col p-2 gap-2 overflow-hidden dark:border-2 dark:border-gray-900"
+                className="max-w-md mx-auto w-screen h-screen dark:bg-black flex flex-col p-2 gap-2 overflow-hidden dark:border-2 dark:border-gray-900"
                 onClick={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-labelledby="comments-modal"
             >
                 <CommentForm handleSubmit={handleSubmit} />
                 <div className="overflow-y-scroll h-full pb-12">
@@ -141,6 +151,13 @@ const CommentsModal = ({ id, open, close, onComment }) => {
         </Dialog>
     );
 };
+
+CommentsModal.propTypes = {
+    id: PropTypes.string.isRequired,
+    open: PropTypes.bool.isRequired,
+    close: PropTypes.func.isRequired,
+    onComment: PropTypes.func,
+}
 
 const EditPostModal = ({ id, open, onClose }) => {
     const {
@@ -311,6 +328,12 @@ const EditPostModal = ({ id, open, onClose }) => {
     );
 };
 
+EditPostModal.propTypes = {
+    id: PropTypes.string.isRequired,
+    open: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+}
+
 const validUsernamePattern = /^[\w.@+-]+$/;
 
 function validateUsername(username) {
@@ -357,7 +380,7 @@ const ChangePasswordModal = ({ open, close }) => {
                     <span className="text-3xl">
                         <iconify-icon icon="game-icons:hummingbird"></iconify-icon>
                     </span>
-                    Change Password
+                    <span>Change Password</span>
                 </h1>
                 <form
                     className="flex flex-col gap-3 border-b-4 border-gray-300  dark:border-gray-900 pb-6"
@@ -401,5 +424,10 @@ const ChangePasswordModal = ({ open, close }) => {
         </Dialog>
     );
 };
+
+ChangePasswordModal.propTypes = {
+    open: PropTypes.bool.isRequired,
+    close: PropTypes.func.isRequired,
+}
 
 export { CommentsModal, EditPostModal, ChangePasswordModal };

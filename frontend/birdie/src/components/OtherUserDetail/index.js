@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Tab, Tabs, createTheme } from "@mui/material";
 import useThemeContext from "../../contexts/themeContext";
 import useUserContext from "../../contexts/UserContext";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams, Navigate } from "react-router-dom";
 import usePageContext from "../../contexts/pageContext";
 import Posts from "./Posts";
 import Media from "./Media";
 import Following from "./Following";
-import { Navigate } from "react-router-dom";
 
 const tabDarkTheme = createTheme({
   palette: {

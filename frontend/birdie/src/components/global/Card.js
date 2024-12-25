@@ -4,6 +4,7 @@ import useUserContext from "../../contexts/UserContext";
 import usePageContext from "../../contexts/pageContext";
 import { CommentsModal, EditPostModal } from "./Modals";
 import { Link } from "react-router-dom";
+import Proptypes from "prop-types";
 
 const CardOptionsComponent = ({ deletePost, edit, onClose }) => {
     useEffect(() => {
@@ -30,6 +31,12 @@ const CardOptionsComponent = ({ deletePost, edit, onClose }) => {
             </button>
         </div>
     );
+};
+
+CardOptionsComponent.propTypes = {
+    deletePost: Proptypes.func.isRequired,
+    edit: Proptypes.func.isRequired,
+    onClose: Proptypes.func.isRequired,
 };
 
 const Card = (props) => {
@@ -193,5 +200,26 @@ const Card = (props) => {
         </div>
     );
 };
+
+Card.propTypes = {
+    id: Proptypes.number.isRequired,
+    avatar: Proptypes.string.isRequired,
+    card_content: Proptypes.string.isRequired,
+    card_image: Proptypes.string,
+    comments: Proptypes.number.isRequired,
+    likes: Proptypes.number.isRequired,
+    saves: Proptypes.number.isRequired,
+    user: Proptypes.string.isRequired,
+    liked: Proptypes.bool.isRequired,
+    creator_id: Proptypes.number.isRequired,
+    onLike: Proptypes.func.isRequired,
+    onSave: Proptypes.func.isRequired,
+    is_saved: Proptypes.bool.isRequired,
+    is_commented: Proptypes.bool.isRequired,
+    is_following_user: Proptypes.bool,
+    created: Proptypes.string.isRequired,
+    isEdited: Proptypes.bool.isRequired,
+    onComment: Proptypes.func.isRequired,
+}
 
 export default Card;

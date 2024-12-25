@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar } from "@mui/material";
 import useUserContext from "../../contexts/UserContext";
+import PropTypes from "prop-types";
 
 const CommentForm = ({ handleSubmit }) => {
     const {
@@ -10,7 +11,7 @@ const CommentForm = ({ handleSubmit }) => {
         <div className="w-full bg-gray-100 p-3 flex gap-2 h-min border-b-4 dark:bg-black dark:border-gray-900">
             <div>
                 <Avatar src={profile_pic} alt={username}>
-                {username?.at(0)?.toUpperCase()}
+                    {username?.at(0).toUpperCase()}
                 </Avatar>
             </div>
             <form className="flex-1 flex flex-col focus:outline-0 gap-4" onSubmit={handleSubmit}>
@@ -34,5 +35,9 @@ const CommentForm = ({ handleSubmit }) => {
         </div>
     );
 };
+
+CommentForm.propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
+}
 
 export default CommentForm;

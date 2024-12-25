@@ -9,7 +9,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
 
@@ -18,10 +17,8 @@ def get_tokens_for_user(user):
         'access': str(refresh.access_token),
     }
 
-
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
-
 
 class SignupAPIView(CreateAPIView):
     model = User
@@ -44,7 +41,6 @@ class SignupAPIView(CreateAPIView):
         response["tokens"] = get_tokens_for_user(instance)
         return Response(response, status=status.HTTP_201_CREATED, headers=headers)
 
-
 class UserDetailAPIView(RetrieveAPIView):
     model = User
     serializer_class = UserSerializer
@@ -59,8 +55,8 @@ class UserDetailAPIView(RetrieveAPIView):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         data = serializer.data
-        id = self.kwargs.get('id', None)
-        if id:
+        requested_id = self.kwargs.get('id', None)
+        if requested_id:
             user = self.request.user
             data["is_following"] = user.following.filter(
                 id=id).exists()
@@ -75,7 +71,6 @@ class FollowingListAPIView(ListAPIView):
         user = User.objects.get(id=user_id)
         return user.following.all()
 
-
 class FollowerListAPIView(ListAPIView):
     serializer_class = UserSerializer
 
@@ -83,7 +78,6 @@ class FollowerListAPIView(ListAPIView):
         user_id = self.kwargs.get("id")
         user = User.objects.get(id=user_id)
         return user.followers.all()
-
 
 class FollowUnfollowUserAPIView(APIView):
 
@@ -108,7 +102,6 @@ class FollowUnfollowUserAPIView(APIView):
         data['followed'] = followed
         data['followers'] = user_following.count()
         return Response(data)
-
 
 class ProfileUpdateAPIView(UpdateAPIView):
     model = User

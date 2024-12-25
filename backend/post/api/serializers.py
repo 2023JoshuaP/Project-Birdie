@@ -5,12 +5,10 @@ from django.contrib.humanize.templatetags.humanize import naturaltime
 
 User = get_user_model()
 
-
 class CreatorSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', "username", "email", "profile_pic")
-
 
 class CommentSerializer(serializers.ModelSerializer):
     creator = CreatorSerializer(read_only=True)
@@ -50,7 +48,6 @@ class CommentSerializer(serializers.ModelSerializer):
 
     def get_post_created(self, comment):
         return naturaltime(comment.post.created)
-
 
 class PostSerializer(serializers.ModelSerializer):
     creator = CreatorSerializer(read_only=True)
