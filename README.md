@@ -17,8 +17,6 @@ Aplicación de red social funcional que permite a los usuarios publicar contenid
    - [Frameworks](#frameworks)  
    - [Bibliotecas](#bibliotecas)  
    - [Herramientas de Construcción y Pruebas](#herramientas-de-construcción-y-pruebas)  
-4. [Configuración Local](#configuración-local)  
-5. [Información de Hosting](#información-de-hosting)  
 
 ---
 
