@@ -25,10 +25,10 @@ Aplicación de red social funcional que permite a los usuarios publicar contenid
 **Nombre del equipo:** Roar Omega Roar  
 
 **Integrantes:**  
-- Phiclo - El Delegado  
-- Jose Alejandro - El Político  
-- Deza - La Mano Derecha  
-- Huertas - El Técnico  
+- Josue Samuel Philco Puma 
+- Jose Alejandro Machaca Muñiz
+- Fernando David Deza Sotomayor  
+- Jose Jesus Huertas Valverde
 
 ---
 
@@ -190,6 +190,19 @@ pipeline {
                 always {
                     archiveArtifacts artifacts: 'frontend/birdie/zap-reports/zap-report.html', fingerprint: true
                 }
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                bat """
+                ${SCANNER_HOME}\\bin\\sonar-scanner ^
+                -Dsonar.host.url=http://localhost:9000 ^
+                -Dsonar.login=squ_2c7359922b4644713a8abec6d394923302774bd5 ^
+                -Dsonar.projectKey=project-birdie ^
+                -Dsonar.projectName=project-birdie ^
+                -Dsonar.sources=. ^
+                -Dsonar.exclusions=**/venv/**,**/*.html
+                """
             }
         }
     }
